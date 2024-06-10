@@ -1,1 +1,2 @@
 botcity-email-plugin
+botcity-framework-web

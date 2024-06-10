@@ -14,7 +14,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['botcity-email-plugin'], 
+        install_requires=['botcity-email-plugin', 'botcity-framework-web'], 
         # needs to be installed along with your package. Eg: 'caer'
         
         keywords=['python'],
