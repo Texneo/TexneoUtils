@@ -1,2 +1,2 @@
-from Consistem import *
-from Email import *
+from .Consistem import *
+from .Email import *

@@ -1,1 +1,1 @@
-from RPA import Consistem, Email
+from .RPA import Consistem, Email

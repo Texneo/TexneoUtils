@@ -7,7 +7,7 @@ LONG_DESCRIPTION = 'Pacote contendo métodos úteis para o desenvolvimento de au
 # Setting up
 setup(
        # the name must match the folder name 'verysimplemodule'
-        name="utilstexneo", 
+        name="TexneoUtils", 
         version=VERSION,
         author="Texneo",
         author_email="<github@texneo.com>",
@@ -15,7 +15,6 @@ setup(
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
         install_requires=['botcity-email-plugin', 'botcity-framework-web'], 
-        # needs to be installed along with your package. Eg: 'caer'
         
         keywords=['python'],
         classifiers= [
