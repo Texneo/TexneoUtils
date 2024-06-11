@@ -53,9 +53,9 @@ def acessar_tela(wbot, tela):
 
     """
     
-    ->
     Acessa tela do Consistem a partir do código.
 
+    ->
     wbot: Instância do web bot ativa.
     tela: Código da tela que deseja abrir.
 

@@ -22,9 +22,7 @@ def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
     email.configure_smtp("smtp.office365.com", 587)
     email.login(usuario, senha)
 
-    rodape = f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>"
-
-    corpo += rodape
+    corpo += f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>"
 
     # Sending the email message
     email.send_message(titulo, corpo, destinatarios, use_html=True)
