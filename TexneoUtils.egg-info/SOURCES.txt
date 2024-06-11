@@ -1,9 +1,0 @@
-setup.py
-RPA/Consistem.py
-RPA/Email.py
-RPA/__init__.py
-TexneoUtils.egg-info/PKG-INFO
-TexneoUtils.egg-info/SOURCES.txt
-TexneoUtils.egg-info/dependency_links.txt
-TexneoUtils.egg-info/requires.txt
-TexneoUtils.egg-info/top_level.txt
