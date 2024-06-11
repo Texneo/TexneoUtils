@@ -29,3 +29,6 @@ def dispara_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
     email.send_message(titulo, corpo, destinatarios, use_html=True)
 
     email.disconnect()
+
+def teste():
+    print("Teste")
