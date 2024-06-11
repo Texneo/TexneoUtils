@@ -6,7 +6,11 @@ def logar(wbot, usuario, senha):
 
     Preenche dados de Login e acessa o Consistem.
 
+    ->
     wbot: Instância do web bot ativa.
+
+    <-
+    string: Retorna 'Sucesso' em caso de Login realizado com sucesso. Do contrário retorna o erro de Login.
 
     """
 
@@ -18,12 +22,23 @@ def logar(wbot, usuario, senha):
     wbot.paste(senha)
     wbot.enter()
 
+    try:
+        span_erro_login = wbot.find_element(selector="//div[@class='loginErrorMessageItem']/span", by=By.XPATH)
+        wbot.wait_for_element_visibility(element=span_erro_login, visible=True, waiting_time=10000)
+
+        return span_erro_login.text
+    
+    except Exception as e:
+
+        return "Sucesso"
+
 def deslogar(wbot):
 
     """
 
     Desloga da instância ativa do Consistem.
 
+    ->
     wbot: Instância do web bot ativa.
 
     """
@@ -34,10 +49,11 @@ def deslogar(wbot):
     wbot.type_left()
     wbot.enter()
 
-def acessa_tela_consistem(wbot, tela):
+def acessar_tela(wbot, tela):
 
     """
     
+    ->
     Acessa tela do Consistem a partir do código.
 
     wbot: Instância do web bot ativa.
