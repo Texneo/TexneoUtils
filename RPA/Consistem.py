@@ -24,7 +24,7 @@ def logar(wbot, usuario, senha):
 
     try:
         span_erro_login = wbot.find_element(selector="//div[@class='loginErrorMessageItem']/span", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=span_erro_login, visible=True, waiting_time=10000)
+        wbot.wait_for_element_visibility(element=span_erro_login, visible=True, waiting_time=5000)
 
         return span_erro_login.text
     
@@ -61,14 +61,43 @@ def acessar_tela(wbot, tela):
 
     """
 
-    menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
-    wbot.wait_for_element_visibility(element=menu, waiting_time=10000)      
-    menu.click()
-    busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
-    wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
-    busca.click()
+    # Valida se tela de menu já não está aberta...
+    try:
 
-    wbot.control_a()
-    wbot.paste(tela)
-    wbot.enter()
-    wbot.wait(1500)
+        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
+        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=3)
+        busca.click()
+
+        wbot.control_a()
+        wbot.paste(tela)
+        wbot.enter()
+        wbot.wait(500)
+
+    except Exception as e:
+
+        menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
+        wbot.wait_for_element_visibility(element=menu, waiting_time=10000)      
+        menu.click()
+        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
+        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
+        busca.click()
+
+        wbot.control_a()
+        wbot.paste(tela)
+        wbot.enter()
+        wbot.wait(500)
+
+def fechar_tela(wbot):
+
+    """
+    
+    Fecha tela do Consistem.
+
+    ->
+    wbot: Instância do web bot ativa.
+
+    """
+
+    x = wbot.find_element(selector='//i[@class="close large icon"]', by=By.XPATH)
+    wbot.wait_for_element_visibility(element=x, waiting_time=5000)      
+    x.click()
