@@ -24,7 +24,7 @@ def logar(wbot, usuario, senha):
 
     try:
         span_erro_login = wbot.find_element(selector="//div[@class='loginErrorMessageItem']/span", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=span_erro_login, visible=True, waiting_time=5000)
+        wbot.wait_for_element_visibility(element=span_erro_login, visible=True, waiting_time=3000)
 
         return span_erro_login.text
     
@@ -101,3 +101,23 @@ def fechar_tela(wbot):
     x = wbot.find_element(selector='//i[@class="close large icon"]', by=By.XPATH)
     wbot.wait_for_element_visibility(element=x, waiting_time=5000)      
     x.click()
+
+def mudar_empresa(wbot, empresa):
+
+    """
+    
+    Altera a empresa do Consistem.
+
+    ->
+    wbot: Instância do web bot ativa.
+    empresa: Código da empresa que se deseja acessar.
+
+    """
+
+    menu_empresa = wbot.find_element(selector="//div[text()[contains(.,'001')]]", by=By.XPATH)
+    wbot.wait_for_element_visibility(element=menu_empresa, visible=True, waiting_time=5000)
+    menu_empresa.click()
+
+    menu_empresa_importacao = wbot.find_element(selector=f'//i[text()[contains(.,"{empresa}")]]', by=By.XPATH)
+    wbot.wait_for_element_visibility(element=menu_empresa_importacao, visible=True, waiting_time=5000)
+    menu_empresa_importacao.click()
