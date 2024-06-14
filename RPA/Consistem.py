@@ -67,7 +67,7 @@ def fechar_tela(wbot):
     """
 
     x = wbot.find_element(selector='//i[@class="close large icon"]', by=By.XPATH)
-    wbot.wait_for_element_visibility(element=x, waiting_time=5000)      
+    wbot.wait_for_element_visibility(element=x, waiting_time=2000)      
     x.click()
 
 def fechar_tela_novidades(wbot):
