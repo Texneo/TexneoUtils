@@ -84,7 +84,7 @@ def fechar_tela_novidades(wbot):
     try:
 
         botao_fechar_tela_novidades = wbot.find_element(selector="//button[contains(text(), 'Ok')]", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=2000)
+        wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=10000)
         botao_fechar_tela_novidades.click()
                             
     except:
