@@ -95,7 +95,6 @@ def fechar_tela_novidades(wbot):
         wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=2000)
         botao_fechar_tela_novidades.click()
 
-                            
     except:
 
         print("Tela de novidades não exibida.")
