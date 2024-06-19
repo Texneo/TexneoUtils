@@ -16,15 +16,10 @@ def acessar_tela(wbot, tela):
     try:
 
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=3)
+        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=3000)
         busca.click()
 
-        wbot.control_a()
-        wbot.paste(tela)
-        wbot.enter()
-        wbot.wait(500)
-
-    except Exception as e:
+    except Exception:
 
         menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=menu, waiting_time=10000)      
@@ -33,10 +28,20 @@ def acessar_tela(wbot, tela):
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
         busca.click()
 
-        wbot.control_a()
-        wbot.paste(tela)
-        wbot.enter()
-        wbot.wait(500)
+    wbot.control_a()
+    wbot.paste(tela)
+    wbot.enter()
+    wbot.wait(500)
+
+    try:
+        checkbox = wbot.find_element(selector='//div[@class="ui checkbox"]/label', by=By.XPATH)
+        checkbox.click()
+
+        botao_fechar_tela_novidades = wbot.find_element(selector="//button[contains(text(), 'Ok')]", by=By.XPATH)
+        wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=2000)
+        botao_fechar_tela_novidades.click()
+    except:
+        print(f"Nenhuma novidade exibida na tela: {tela}")
 
 def deslogar(wbot):
 
@@ -83,11 +88,16 @@ def fechar_tela_novidades(wbot):
 
     try:
 
+        checkbox = wbot.find_element(selector='//div[@class="ui checkbox"]/label', by=By.XPATH)
+        checkbox.click()
+
         botao_fechar_tela_novidades = wbot.find_element(selector="//button[contains(text(), 'Ok')]", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=15000)
+        wbot.wait_for_element_visibility(element=botao_fechar_tela_novidades, visible=True, waiting_time=2000)
         botao_fechar_tela_novidades.click()
+
                             
     except:
+
         print("Tela de novidades não exibida.")
 
 def logar(wbot, usuario, senha):
@@ -118,14 +128,14 @@ def logar(wbot, usuario, senha):
 
         return span_erro_login.text
     
-    except Exception as e:
+    except Exception:
 
         return "Sucesso"
 
 def mudar_empresa(wbot, empresa):
 
     """
-    
+
     Altera a empresa do Consistem.
 
     ->
