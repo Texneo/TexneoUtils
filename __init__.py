@@ -1,1 +1,1 @@
-from RPA import Consistem, Email, SO
+from RPA import Consistem, Email, SO, EDGE

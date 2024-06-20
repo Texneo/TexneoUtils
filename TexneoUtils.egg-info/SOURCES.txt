@@ -1,5 +1,6 @@
 setup.py
 RPA/Consistem.py
+RPA/EDGE.py
 RPA/Email.py
 RPA/SO.py
 RPA/__init__.py
