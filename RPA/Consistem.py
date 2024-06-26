@@ -60,6 +60,20 @@ def deslogar(wbot):
     wbot.type_left()
     wbot.enter()
 
+    deslogado = False
+    while(not deslogado):
+
+        try:
+            campo_usuario = wbot.find_element(selector="//div[@class='ui left icon input loginTextField ']", by=By.XPATH)
+            wbot.wait_for_element_visibility(element=campo_usuario, visible=True, waiting_time=10000)
+            deslogado = True
+        except:
+            botao_deslogar = wbot.find_element(selector="//i[@class='red shutdown icon']", by=By.XPATH)
+            wbot.wait_for_element_visibility(element=botao_deslogar, visible=True, waiting_time=2000)
+            botao_deslogar.click()
+            wbot.type_left()
+            wbot.enter()
+            
 def fechar_tela(wbot):
 
     """

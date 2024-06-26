@@ -1,4 +1,5 @@
 from botcity.web.browsers.edge import default_options
+from botcity.web import Browser
 
 def colocar_em_primeiro_plano(dbot):
 
@@ -19,7 +20,7 @@ def configurar(wbot):
 
     """
     
-    Prepara EDGE para aexecução padrão.
+    Prepara EDGE para a execução padrão.
 
     ->
     wbot: Instância do web bot ativa.
@@ -31,3 +32,9 @@ def configurar(wbot):
     def_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
     wbot.options = def_options
+
+    # Definindo caminho do Driver
+    wbot.driver_path = r"C:\Users\bot-python-01\Documents\WebDrivers\msedgedriver.exe"
+
+    # Definindo navegador como EDGE
+    wbot.browser = Browser.EDGE
