@@ -133,7 +133,10 @@ def logar(wbot, usuario, senha):
     wbot.paste(usuario)
     wbot.tab()
     wbot.paste(senha)
-    wbot.enter()
+
+    botao_logar = wbot.find_element(selector="//button[@class='ui fluid primary button loginButton ']", by=By.XPATH)
+    wbot.wait_for_element_visibility(element=botao_logar, visible=True, waiting_time=5000)
+    botao_logar.click()
 
     try:
         span_erro_login = wbot.find_element(selector="//div[@class='loginErrorMessageItem']/span", by=By.XPATH)
