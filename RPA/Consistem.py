@@ -16,16 +16,16 @@ def acessar_tela(wbot, tela):
     try:
 
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=3000)
+        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=2000)
         busca.click()
 
     except Exception:
 
         menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=menu, waiting_time=10000)      
+        wbot.wait_for_element_visibility(element=menu, waiting_time=5000)      
         menu.click()
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
-        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
+        wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=5000)
         busca.click()
 
     wbot.control_a()
