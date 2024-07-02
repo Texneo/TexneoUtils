@@ -43,6 +43,26 @@ def acessar_tela(wbot, tela):
     except:
         print(f"Nenhuma novidade exibida na tela: {tela}")
 
+def aguardar_carregamento(wbot):
+
+    """
+
+    Aguarda a conclusão do processamento de tela.
+
+    ->
+    wbot: Instância do web bot ativa.
+
+    """
+
+    while True:
+
+        try:
+            load_icon = wbot.find_element(selector='//div[@class="loader-react-ccs delay visible"]/div/img', by=By.XPATH)
+            wbot.wait_for_element_visibility(element=load_icon, visible=True, waiting_time=5000)
+
+        except:
+            break
+
 def deslogar(wbot):
 
     """
