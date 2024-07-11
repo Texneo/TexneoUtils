@@ -12,7 +12,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['botcity-email-plugin', 'botcity-framework-web'], 
+        install_requires=['botcity-email-plugin', 'botcity-framework-web', 'sqlalchemy', 'pandas'], 
         
         keywords=['python'],
         classifiers= [
