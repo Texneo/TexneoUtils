@@ -1,0 +1,13 @@
+setup.py
+DB/Excel.py
+DB/__init__.py
+RPA/Consistem.py
+RPA/EDGE.py
+RPA/Email.py
+RPA/SO.py
+RPA/__init__.py
+TexneoUtils.egg-info/PKG-INFO
+TexneoUtils.egg-info/SOURCES.txt
+TexneoUtils.egg-info/dependency_links.txt
+TexneoUtils.egg-info/requires.txt
+TexneoUtils.egg-info/top_level.txt
