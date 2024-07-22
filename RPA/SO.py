@@ -1,5 +1,25 @@
 import os
 
+def limpar_diretorios(lista_diretorios):
+
+    """
+    
+    Remove todos os arquivos de uma lista de diretórios.
+
+    ->
+    lista_diretorios: Lista de string contendo os diretórios a serem esvaziados.
+
+    """
+
+    for diretorio in lista_diretorios:
+
+        lista_arquivos = os.listdir(diretorio)
+
+        for arquivo in lista_arquivos:
+
+            os.remove(diretorio + "\\" + arquivo)
+
+
 def mover_arquivo(origem, destino, nome_origem, nome_destino):
 
     """
