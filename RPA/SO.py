@@ -19,7 +19,6 @@ def limpar_diretorios(lista_diretorios):
 
             os.remove(diretorio + "\\" + arquivo)
 
-
 def mover_arquivo(origem, destino, nome_origem, nome_destino):
 
     """
