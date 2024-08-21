@@ -25,7 +25,7 @@ def acessar_tela(wbot, tela):
         wbot.wait_for_element_visibility(element=menu, waiting_time=5000)      
         menu.click()
 
-        wbot.wait(10000)
+        wbot.wait(15000)
         
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=5000)
