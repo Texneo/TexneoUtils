@@ -31,10 +31,13 @@ def acessar_tela(wbot, tela):
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=5000)
         busca.click()
 
+        wbot.wait(2000)
+
     wbot.control_a()
     wbot.paste(tela)
+    wbot.wait(2500)
     wbot.enter()
-    wbot.wait(500)
+    wbot.wait(2500)
 
     try:
         checkbox = wbot.find_element(selector='//div[@class="ui checkbox"]/label', by=By.XPATH)
