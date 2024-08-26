@@ -25,19 +25,16 @@ def acessar_tela(wbot, tela):
         wbot.wait_for_element_visibility(element=menu, waiting_time=5000)      
         menu.click()
 
-        wbot.wait(15000)
+        wbot.wait(10000)
         
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=5000)
         busca.click()
 
-        wbot.wait(2000)
-
     wbot.control_a()
     wbot.paste(tela)
-    wbot.wait(2500)
     wbot.enter()
-    wbot.wait(2500)
+    wbot.wait(500)
 
     try:
         checkbox = wbot.find_element(selector='//div[@class="ui checkbox"]/label', by=By.XPATH)
