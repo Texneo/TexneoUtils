@@ -1,4 +1,5 @@
 from botcity.plugins.email import BotEmailPlugin
+import time
 
 def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
 
@@ -25,6 +26,19 @@ def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
     corpo += f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>"
 
     # Sending the email message
-    email.send_message(titulo, corpo, destinatarios, use_html=True)
+    enviado = False
+    tentativas = 0
+    limite_tentativas = 10
+
+    while(not enviado and tentativas < limite_tentativas):
+
+        try:
+            email.send_message(titulo, corpo, destinatarios, use_html=True)
+            enviado = True
+        except Exception as e:
+            tentativas += 1
+            time.sleep(5)
+            if not(tentativas < limite_tentativas):
+                raise e
 
     email.disconnect()
