@@ -1,0 +1,5 @@
+botcity-email-plugin
+botcity-framework-web
+sqlalchemy
+pandas
+webdriver_manager
