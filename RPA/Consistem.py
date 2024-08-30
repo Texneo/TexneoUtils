@@ -29,6 +29,7 @@ def acessar_tela(wbot, tela):
         
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']/input", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
+        busca.clear()
         busca.send_keys(tela)
 
     wbot.enter()
