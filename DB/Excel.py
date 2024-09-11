@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 import pandas
 
-def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username, db_password, db_tabela, db_schema):
+def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username, db_password, db_tabela, db_schema, if_exists):
 
     """
     
@@ -19,9 +19,10 @@ def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username,
     db_password = Password.
     db_tabela = Tabela para inserir os dados.
     db_schema = Schema da tabela.
+    if_exists = O que fazer em caso de a tabela já existir. ["append", "fail", "replace"]
     
     """
 
     engine = create_engine(f"mssql+pymssql://{db_username}:%s@{db_server}/{db_database}" % quote_plus(db_password))
     excel = pandas.read_excel(caminho_arquivo)
-    excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists="append")
+    excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists)
