@@ -3,4 +3,3 @@ botcity-framework-web
 sqlalchemy
 pandas
 webdriver_manager
-botcity-recorder-plugin

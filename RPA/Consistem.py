@@ -25,8 +25,6 @@ def acessar_tela(wbot, tela):
         menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=menu, waiting_time=5000)      
         menu.click()
-
-        wbot.wait(10000)
         
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']/input", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
@@ -46,6 +44,26 @@ def acessar_tela(wbot, tela):
     except:
         print(f"Nenhuma novidade exibida na tela: {tela}")
 
+def aguardar_atualizacao(wbot):
+
+    """
+
+    Aguarda a conclusão da atualização em tela (barra de progresso).
+
+    ->
+    wbot: Instância do web bot ativa.
+
+    """
+
+    while True:
+
+        try:
+            load_icon = wbot.find_element(selector='//*[@class="CircularProgressbar cswCustomTransferBar rotating"]', by=By.XPATH)
+            wbot.wait_for_element_visibility(element=load_icon, visible=True, waiting_time=2500)
+
+        except:
+             break
+
 def aguardar_carregamento(wbot):
 
     """
@@ -61,7 +79,7 @@ def aguardar_carregamento(wbot):
 
         try:
             load_icon = wbot.find_element(selector='//div[@class="loader-react-ccs delay visible"]/div/img', by=By.XPATH)
-            wbot.wait_for_element_visibility(element=load_icon, visible=True, waiting_time=5000)
+            wbot.wait_for_element_visibility(element=load_icon, visible=True, waiting_time=2500)
 
         except:
             break
