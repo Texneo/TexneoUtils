@@ -4,6 +4,7 @@ DB/__init__.py
 RPA/Consistem.py
 RPA/EDGE.py
 RPA/Email.py
+RPA/Ganhos.py
 RPA/SO.py
 RPA/__init__.py
 TexneoUtils.egg-info/PKG-INFO
