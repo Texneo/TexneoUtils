@@ -15,6 +15,7 @@ def acessar_tela(wbot, tela):
     # Valida se tela de menu já não está aberta...
     try:
 
+        wbot.wait(1000)
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=2000)
         busca.clear()
@@ -25,6 +26,8 @@ def acessar_tela(wbot, tela):
         menu = wbot.find_element(selector="//i[@class='computer icon']", by=By.XPATH)
         wbot.wait_for_element_visibility(element=menu, waiting_time=5000)      
         menu.click()
+
+        wbot.wait(2000)
         
         busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']/input", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
@@ -32,7 +35,7 @@ def acessar_tela(wbot, tela):
         busca.send_keys(tela)
 
     wbot.enter()
-    wbot.wait(500)
+    wbot.wait(1000)
 
     try:
         checkbox = wbot.find_element(selector='//div[@class="ui checkbox"]/label', by=By.XPATH)
