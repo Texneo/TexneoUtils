@@ -29,8 +29,10 @@ def configurar(wbot):
     """
 
     def_options = default_options()
+    def_options.add_argument("--start-maximized")
     def_options.add_argument("--remote-debugging-port=9999")
-    def_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
+    def_options.add_experimental_option('useAutomationExtension', False)
     def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
     wbot.options = def_options
 
