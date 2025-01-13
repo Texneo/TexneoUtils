@@ -29,12 +29,6 @@ def configurar(wbot):
     
     """
 
-    #Encerrando todos os Edges em andamento.
-    try:
-        subprocess.check_output(['powershell', '-Command', 'taskkill /F /IM msedge.exe'])
-    except:
-        pass
-
     def_options = default_options()
     def_options.add_argument("--start-maximized")
     def_options.add_argument("--remote-debugging-port=9999")

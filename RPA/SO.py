@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 
 def limpar_diretorios(lista_diretorios):
 
@@ -34,6 +34,32 @@ def mover_arquivo(origem, destino, nome_origem, nome_destino):
     """
 
     os.rename(f"{origem}\{nome_origem}", f"{destino}\{nome_destino}")
+
+def preparar_execucao():
+
+    """
+    
+    Prepara o ambiente para uma execução segura.
+
+    """
+
+    #Encerrando todos os Edges e Chromes em andamento.
+    try:
+        subprocess.check_output(['powershell', '-Command', 'taskkill /F /IM msedge.exe; taskkill /F /IM chrome.exe'])
+    except:
+        pass
+
+    #Limpando a lixeira.
+    try:
+        subprocess.check_output(['powershell', '-Command', 'Clear-RecycleBin -Force'])
+    except:
+        pass
+
+    #Limpando pasta de downloads e temp.
+    try:
+        limpar_diretorios(['C:\\Users\\bot-python-01\\Downloads','C:\\temp'])
+    except:
+        pass
 
 def valida_diretorios(lista_diretorios):
 
