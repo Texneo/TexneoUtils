@@ -1,6 +1,7 @@
 setup.py
 DB/Excel.py
 DB/__init__.py
+RPA/Chrome.py
 RPA/Consistem.py
 RPA/EDGE.py
 RPA/Email.py

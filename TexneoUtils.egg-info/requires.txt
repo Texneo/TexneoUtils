@@ -1,5 +1,7 @@
 botcity-email-plugin
-botcity-framework-web
+botcity-framework-web<1.0,>=0.9.0
 sqlalchemy
 pandas
 webdriver_manager
+undetected-chromedriver==2.1.1
+numpy<2

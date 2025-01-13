@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.2' 
+VERSION = '0.0.3' 
 DESCRIPTION = 'Pacote de Utilitários Texneo'
 LONG_DESCRIPTION = 'Pacote contendo métodos úteis para o desenvolvimento de automações na Texneo.'
 
@@ -12,7 +12,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['botcity-email-plugin', 'botcity-framework-web', 'sqlalchemy', 'pandas', 'webdriver_manager'], 
+        install_requires=['botcity-email-plugin', 'botcity-framework-web>=0.9.0,<1.0', 'sqlalchemy', 'pandas', 'webdriver_manager', 'undetected-chromedriver==2.1.1', 'numpy<2'], 
         
         keywords=['python'],
         classifiers= [

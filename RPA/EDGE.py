@@ -1,6 +1,7 @@
 from botcity.web.browsers.edge import default_options
 from botcity.web import Browser
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+import subprocess
 
 def colocar_em_primeiro_plano(dbot):
 
@@ -27,6 +28,9 @@ def configurar(wbot):
     wbot: Instância do web bot ativa.
     
     """
+
+    #Encerrando todos os Edges em andamento.
+    subprocess.check_output(['powershell', '-Command', 'taskkill /F /IM msedge.exe'])
 
     def_options = default_options()
     def_options.add_argument("--start-maximized")
