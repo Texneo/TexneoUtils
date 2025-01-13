@@ -30,7 +30,10 @@ def configurar(wbot):
     """
 
     #Encerrando todos os Edges em andamento.
-    subprocess.check_output(['powershell', '-Command', 'taskkill /F /IM msedge.exe'])
+    try:
+        subprocess.check_output(['powershell', '-Command', 'taskkill /F /IM msedge.exe'])
+    except:
+        pass
 
     def_options = default_options()
     def_options.add_argument("--start-maximized")
