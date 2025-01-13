@@ -49,12 +49,6 @@ def preparar_execucao():
     except:
         pass
 
-    #Limpando a lixeira.
-    try:
-        subprocess.check_output(['powershell', '-Command', 'Clear-RecycleBin -Force'])
-    except:
-        pass
-
     #Limpando pasta de downloads e temp.
     try:
         limpar_diretorios(['C:\\Users\\bot-python-01\\Downloads','C:\\temp'])
