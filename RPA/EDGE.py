@@ -1,7 +1,7 @@
 from botcity.web.browsers.edge import default_options
 from botcity.web import Browser
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-import subprocess
+from time import sleep
 
 def colocar_em_primeiro_plano(dbot):
 
@@ -40,6 +40,8 @@ def configurar(wbot):
     # Definindo caminho do Driver
     manager = EdgeChromiumDriverManager()
     wbot.driver_path = manager.install()
+
+    sleep(5)
 
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
