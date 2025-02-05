@@ -4,3 +4,4 @@ sqlalchemy
 pandas
 webdriver_manager
 numpy<2
+undetected-chromedriver
