@@ -12,7 +12,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['botcity-email-plugin', 'botcity-framework-web>=0.9.0,<1.0', 'sqlalchemy', 'pandas', 'webdriver_manager', 'numpy<2', 'undetected-chromedriver'], 
+        install_requires=['botcity-email-plugin', 'botcity-framework-web>=0.9.0,<1.0', 'sqlalchemy', 'pandas', 'webdriver_manager', 'numpy<2', 'undetected-chromedriver==2.1.1'], 
         
         keywords=['python'],
         classifiers= [
