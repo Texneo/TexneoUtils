@@ -1,6 +1,6 @@
-from botcity.web.browsers.edge import default_options
+from botcity.web.browsers.chrome import Options
 from botcity.web import Browser
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 import os
 
@@ -41,7 +41,7 @@ def configurar(wbot):
     while tentativas < maximo_tentativas:
         
         try:
-            def_options = default_options()
+            def_options = Options()
             def_options.add_argument("--start-maximized")
             def_options.add_argument("--no-sandbox")
             def_options.add_argument(f"--user-data-dir={create_unique_user_data_dir()}")
@@ -51,16 +51,19 @@ def configurar(wbot):
             wbot.options = def_options
         
             # Definindo caminho do Driver
-            manager = EdgeChromiumDriverManager()
+            manager = ChromeDriverManager()
             wbot.driver_path = manager.install()
         
             sleep(5)
         
             # Definindo navegador como EDGE
-            wbot.browser = Browser.EDGE
+            wbot.browser = Browser.CHROME
+
+            driver_service = Service(wbot.driver_path)
+            wbot.browser = webdriver.Chrome(service=driver_service, options=def_options)
     
             if is_browser_session_active(wbot.browser):
-                print("Sessão do navegador EDGE criada com sucesso!")
+                print("Sessão do navegador CHROME criada com sucesso!")
                 return  # Retorna se a sessão estiver ativa
             else:
                 raise Exception("Sessão não ativa, tentando novamente...")
