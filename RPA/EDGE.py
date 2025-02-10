@@ -1,4 +1,5 @@
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from botcity.web import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
