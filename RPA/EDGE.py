@@ -32,6 +32,7 @@ def configurar(wbot):
     def_options = default_options()
     def_options.add_argument("--start-maximized")
     def_options.add_argument("--remote-debugging-port=9222")
+    def_options.add_argument(f"--user-data-dir={create_unique_user_data_dir()}")
     def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
     def_options.add_experimental_option('useAutomationExtension', False)
     def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
@@ -45,3 +46,9 @@ def configurar(wbot):
 
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
+    
+def create_unique_user_data_dir(base_path="C:\\Users\\bot-python-01\\Documents\\EdgeCache"):
+    user_data_dir = base_path + "_unique"  # Adiciona sufixo "_unique" para garantir exclusividade
+    if not os.path.exists(user_data_dir):
+        os.makedirs(user_data_dir)
+    return user_data_dir
