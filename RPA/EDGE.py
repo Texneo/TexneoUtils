@@ -32,7 +32,7 @@ def configurar(wbot):
 
     def_options = default_options()
     def_options.add_argument("--start-maximized")
-    def_options.add_argument("--remote-debugging-port=9222")
+    def_options.add_argument("--no-sandbox")
     def_options.add_argument(f"--user-data-dir={create_unique_user_data_dir()}")
     def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
     def_options.add_experimental_option('useAutomationExtension', False)
