@@ -112,13 +112,6 @@ def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username,
     
     """
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
     engine = create_engine(f"mssql+pymssql://{db_username}:%s@{db_server}/{db_database}" % quote_plus(db_password))
-    
-    with session.begin():
-        excel = pandas.read_excel(caminho_arquivo)
-        excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists)
-
-    session.commit()
+    excel = pandas.read_excel(caminho_arquivo)
+    excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists)
