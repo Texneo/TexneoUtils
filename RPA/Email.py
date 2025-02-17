@@ -1,5 +1,9 @@
-from botcity.plugins.email import BotEmailPlugin
-import time
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+import smtplib
 
 def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
 
@@ -17,28 +21,69 @@ def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
 
     """
 
-    email = BotEmailPlugin()
+    # Criação do objeto MIMEMultipart
+    msg = MIMEMultipart()
+    msg['From'] = usuario
+    msg['To'] = destinatarios
+    msg['Subject'] = titulo
 
-    # Configure SMTP with the gmail server
-    email.configure_smtp("smtp.office365.com", 587)
-    email.login(usuario, senha)
+    # Adicionando o corpo do e-mail
+    msg.attach(MIMEText(corpo + f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>", 'html'))
 
-    corpo += f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>"
+    # Conectar ao servidor SMTP e enviar o e-mail
+    try:
+        server = smtplib.SMTP("smtp.office365.com", 587)
+        server.starttls()  # Ativa a criptografia TLS
+        server.login(usuario, senha)
+        text = msg.as_string()
+        server.sendmail(usuario, destinatarios, text)
+    except Exception as e:
+        raise e
+    finally:
+        server.quit()
 
-    # Sending the email message
-    enviado = False
-    tentativas = 0
-    limite_tentativas = 10
 
-    while(not enviado and tentativas < limite_tentativas):
 
+def disparar_email_anexo(destinatarios, titulo, corpo, id_rpa, usuario, senha, anexo):
+
+    # Criação do objeto MIMEMultipart
+    msg = MIMEMultipart()
+    msg['From'] = usuario
+    msg['To'] = destinatarios
+    msg['Subject'] = titulo
+
+    # Adicionando o corpo do e-mail
+    msg.attach(MIMEText(corpo + f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>", 'html'))
+
+    # Abrindo o arquivo para anexo
+
+    if(anexo):
         try:
-            email.send_message(titulo, corpo, destinatarios, use_html=True)
-            enviado = True
-        except Exception as e:
-            tentativas += 1
-            time.sleep(5)
-            if not(tentativas < limite_tentativas):
-                raise e
+            with open(anexo, "rb") as attachment:
+                # Criando o objeto MIMEBase
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(attachment.read())
 
-    email.disconnect()
+                # Codificando o anexo em base64
+                encoders.encode_base64(part)
+
+                # Adicionando cabeçalho de tipo do arquivo
+                part.add_header('Content-Disposition', f'attachment; filename="{anexo.split("/")[-1]}"')
+
+                # Anexando ao e-mail
+                msg.attach(part)
+
+        except Exception as e:
+            print(f"Erro ao anexar o arquivo: {e}")
+
+    # Conectar ao servidor SMTP e enviar o e-mail
+    try:
+        server = smtplib.SMTP("smtp.office365.com", 587)
+        server.starttls()  # Ativa a criptografia TLS
+        server.login(usuario, senha)
+        text = msg.as_string()
+        server.sendmail(usuario, destinatarios, text)
+    except Exception as e:
+        raise e
+    finally:
+        server.quit()
