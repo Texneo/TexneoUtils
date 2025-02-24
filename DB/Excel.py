@@ -112,6 +112,50 @@ def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username,
     
     """
 
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
     engine = create_engine(f"mssql+pymssql://{db_username}:%s@{db_server}/{db_database}" % quote_plus(db_password))
-    excel = pandas.read_excel(caminho_arquivo)
-    excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists)
+    
+    with session.begin():
+        excel = pandas.read_excel(caminho_arquivo)
+        excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists)
+
+    session.commit()
+
+def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username, db_password, db_tabela, db_schema, db_sheet, db_columns, if_exists):
+
+    """
+    
+    Faz o upload de dados de tabela Excel para dentro do banco SQL Server. 
+    Este método espera que o nome das colunas no arquivo Excel seja o mesmo nome na coluna dentro da tabela no banco de dados.
+
+    Necessário instalar Driver para realizar a conexão.
+
+    ->
+    caminho_xlsx: Caminho do arquivo XLSX que se deseja importar.
+    db_server: Servidor do banco de dados.
+    db_database = Nome da database.
+    db_username = Username.
+    db_password = Password.
+    db_tabela = Tabela para inserir os dados.
+    db_schema = Schema da tabela.
+    db_sheet = Aba do Excel que deseja importar.
+    db_columns = Colunas que deseja importar.
+    if_exists = O que fazer em caso de a tabela já existir. ["append", "fail", "replace"]
+    
+    """
+
+    # Dados de conexão
+    engine = create_engine(f"mssql+pymssql://{db_username}:%s@{db_server}/{db_database}" % quote_plus(db_password))
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    with session.begin():
+        # Leitura do Excel com a aba e as colunas específicas
+        excel = pandas.read_excel(caminho_arquivo, sheet_name=db_sheet, usecols=db_columns)
+        
+        # Importando para o banco de dados
+        excel.to_sql(db_tabela, con=engine, schema=db_schema, if_exists=if_exists, index=False)
+
+    session.commit()
