@@ -123,7 +123,7 @@ def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username,
 
     session.commit()
 
-def importar_XLSX_para_SQL(caminho_arquivo, db_server, db_database, db_username, db_password, db_tabela, db_schema, db_sheet, db_columns, if_exists):
+def importar_XLSX_para_SQL_complete(caminho_arquivo, db_server, db_database, db_username, db_password, db_tabela, db_schema, db_sheet, db_columns, if_exists):
 
     """
     
