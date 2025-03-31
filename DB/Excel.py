@@ -24,7 +24,10 @@ def exportar_SQL_para_TXT(caminho_arquivo, db_server, db_database, db_username, 
     """
     
     # Configuração do banco de dados
-    engine = create_engine(f"mssql+pymssql://{db_username}:{quote_plus(db_password)}@{db_server}/{db_database}")
+    engine = create_engine(
+        f"mssql+pymssql://{db_username}:{quote_plus(db_password)}@{db_server}/{db_database}",
+        connect_args={"timeout": 300}  # Timeout de 300 segundos (5 minutos)
+    )
 
     # Query para buscar os dados do banco
     query = f"SELECT * FROM {db_schema}.{db_tabela}"
