@@ -49,15 +49,20 @@ def disparar_email_anexo(destinatarios, titulo, corpo, id_rpa, usuario, senha, a
     # Criação do objeto MIMEMultipart
     msg = MIMEMultipart()
     msg['From'] = usuario
-    msg['To'] = ', '.join(str(destinatarios).split(";"))
+
+    # Corrigindo: Garantir que destinatarios seja uma lista de e-mails
+    if isinstance(destinatarios, str):
+        destinatarios = destinatarios.split(';')  # Se for string separada por ponto e vírgula, converte para lista.
+
+    msg['To'] = ', '.join(destinatarios)  # No formato correto para SMTP
+
     msg['Subject'] = titulo
 
     # Adicionando o corpo do e-mail
     msg.attach(MIMEText(corpo + f"<br><br><p><b>Observação:</b> Este e-mail foi gerado automaticamente via RPA - {id_rpa}. Em caso de dúvida entre em contato com a equipe de TI - Automação.</p>", 'html'))
 
     # Abrindo o arquivo para anexo
-
-    if(anexo):
+    if anexo:
         try:
             with open(anexo, "rb") as attachment:
                 # Criando o objeto MIMEBase
