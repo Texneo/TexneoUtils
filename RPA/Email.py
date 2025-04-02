@@ -24,7 +24,7 @@ def disparar_notificacao(destinatarios, titulo, corpo, id_rpa, usuario, senha):
     # Criação do objeto MIMEMultipart
     msg = MIMEMultipart()
     msg['From'] = usuario
-    msg['To'] = destinatarios
+    msg['To'] = str(destinatarios).split(";")
     msg['Subject'] = titulo
 
     # Adicionando o corpo do e-mail
@@ -49,7 +49,7 @@ def disparar_email_anexo(destinatarios, titulo, corpo, id_rpa, usuario, senha, a
     # Criação do objeto MIMEMultipart
     msg = MIMEMultipart()
     msg['From'] = usuario
-    msg['To'] = destinatarios
+    msg['To'] = str(destinatarios).split(";")
     msg['Subject'] = titulo
 
     # Adicionando o corpo do e-mail
