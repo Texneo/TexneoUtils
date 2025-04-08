@@ -41,7 +41,7 @@ def configurar(wbot):
     manager = EdgeChromiumDriverManager()
     wbot.driver_path = manager.install()
 
-    sleep(20)
-
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
+
+    sleep(10)
