@@ -44,4 +44,4 @@ def configurar(wbot):
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
 
-    sleep(10)
+    sleep(5)
