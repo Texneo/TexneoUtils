@@ -35,8 +35,7 @@ def configurar(wbot):
     while True:
         try:
             if os.path.exists(diretorio_temp):
-                shutil.rmtree(diretorio_temp)
-                os.makedirs(diretorio_temp)
+                pass
             else:
                 os.makedirs(diretorio_temp)
         
