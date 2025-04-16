@@ -19,7 +19,7 @@ def colocar_em_primeiro_plano(dbot):
     janela_edge = dbot.app.top_window()
     janela_edge.set_focus()
 
-def configurar(wbot, init_time):
+def configurar(wbot):
 
     """
     
@@ -30,7 +30,7 @@ def configurar(wbot, init_time):
     
     """
 
-    diretorio_temp = os.path.join(os.getcwd(), f"temp_{init_time}")
+    diretorio_temp = os.path.join(os.getcwd(), f"temp")
 
     if os.path.exists(diretorio_temp):
         shutil.rmtree(diretorio_temp)
