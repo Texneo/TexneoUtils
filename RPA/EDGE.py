@@ -32,14 +32,19 @@ def configurar(wbot):
 
     diretorio_temp = os.path.join(os.getcwd(), f"temp")
 
-    if os.path.exists(diretorio_temp):
-        shutil.rmtree(diretorio_temp)
-        os.makedirs(diretorio_temp)
-    else:
-        os.makedirs(diretorio_temp)
-
-    while not os.path.exists(diretorio_temp):
-        time.sleep(0.5)
+    while True:
+        try:
+            if os.path.exists(diretorio_temp):
+                shutil.rmtree(diretorio_temp)
+                os.makedirs(diretorio_temp)
+            else:
+                os.makedirs(diretorio_temp)
+        
+            while not os.path.exists(diretorio_temp):
+                time.sleep(0.5)
+            break
+        except:
+            pass
 
     def_options = default_options()
     def_options.add_argument("--start-maximized")
