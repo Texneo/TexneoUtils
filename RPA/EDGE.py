@@ -36,7 +36,7 @@ def configurar(wbot):
     options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 
     # Caminho fixo para o EdgeDriver
-    wbot.driver_path = driver_path
+    #wbot.driver_path = driver_path
     #wbot.options = options
     wbot.browser = "EDGE"
     wbot.driver = webdriver.Edge(options = options)
