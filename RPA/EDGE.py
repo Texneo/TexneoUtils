@@ -50,11 +50,11 @@ def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
             wbot.browser = "EDGE"
             wbot.driver = driver
 
-            print("✅ Navegador iniciado com sucesso.")
+            print("Navegador iniciado com sucesso.")
             return  # sai da função após sucesso
 
         except Exception as e:
-            print(f"❌ Erro ao iniciar o EdgeDriver: {e}")
+            print(f"Erro ao iniciar o EdgeDriver: {e}")
             tentativa += 1
 
             # Tenta encerrar qualquer driver pendente
@@ -65,4 +65,4 @@ def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
 
             time.sleep(espera_entre_tentativas)
 
-    raise Exception(f"❌ Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
+    raise Exception(f"Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
