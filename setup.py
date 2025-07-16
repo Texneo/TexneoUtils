@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 from setuptools.command.install import install
 import os
 
+print("Instalação iniciando...")
 # Script de patch: substitui azureedge.net por microsoft.com após instalação
 def patch_webdriver_manager():
     import pathlib
@@ -38,6 +39,7 @@ class PostInstallCommand(install):
     def run(self):
         install.run(self)
         try:
+            print("Comandos pós instalação inciando...")
             patch_webdriver_manager()
         except Exception as e:
             print(f"Erro ao aplicar patch: {e}")
