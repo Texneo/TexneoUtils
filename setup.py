@@ -1,47 +1,78 @@
-from selenium.webdriver.edge.options import Options as EdgeOptions
-from selenium.webdriver.edge.service import Service as EdgeService
-from selenium import webdriver
-import os, time
+from setuptools import setup, find_packages
+from setuptools.command.install import install
+import os
 
-def configurar(wbot):
-    """
-    Prepara EDGE para a execução padrão usando driver fixo.
+# Script de patch: substitui azureedge.net por microsoft.com após instalação
+def patch_webdriver_manager():
+    import pathlib
+
+    base_dir = pathlib.Path(__file__).parent
+    wdm_path = list(base_dir.rglob("site-packages/webdriver_manager/microsoft.py"))
+
+    if not wdm_path:
+        print("Não foi possível encontrar o arquivo microsoft.py para patch.")
+        return
+
+    target_file = wdm_path[0]
+    print(f"Patching webdriver_manager: {target_file}")
+
+    with open(target_file, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    if "https://msedgedriver.azureedge.net" in content:
+        print("URL antiga identificada.")
     
-    -> wbot: Instância do web bot ativa.
-    """
+    content = content.replace(
+        "https://msedgedriver.azureedge.net",
+        "https://msedgedriver.microsoft.com"
+    )
 
-    diretorio_temp = os.path.join(os.getcwd(), "temp")
+    if "https://msedgedriver.azureedge.net" not in content:
+        print("URL antiga removida.")
 
-    while True:
+    with open(target_file, "w", encoding="utf-8") as f:
+        f.write(content)
+
+class PostInstallCommand(install):
+    """Comando customizado para rodar patch após instalação."""
+    def run(self):
+        install.run(self)
         try:
-            if not os.path.exists(diretorio_temp):
-                os.makedirs(diretorio_temp)
+            patch_webdriver_manager()
+        except Exception as e:
+            print(f"Erro ao aplicar patch: {e}")
 
-            while not os.path.exists(diretorio_temp):
-                time.sleep(0.5)
-            break
-        except:
-            pass
+VERSION = '0.0.3'
+DESCRIPTION = 'Pacote de Utilitários Texneo'
+LONG_DESCRIPTION = 'Pacote contendo métodos úteis para o desenvolvimento de automações na Texneo.'
 
-    # Configura opções do Edge
-    def_options = EdgeOptions()
-    def_options.add_argument("--start-maximized")
-    def_options.add_argument("--remote-debugging-port=9222")
-    def_options.add_argument("--inprivate")
-    def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
-    def_options.add_experimental_option('useAutomationExtension', False)
-    def_options.add_experimental_option('prefs', {
-        'browser': {
-            'show_hub_popup_on_download_start': False
-        }
-    })
-
-    # Caminho fixo para o EdgeDriver
-    driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
-    wbot.driver_path = driver_path
-
-    # Se estiver instanciando o webdriver aqui diretamente:
-    # wbot.driver = webdriver.Edge(service=EdgeService(driver_path), options=def_options)
-
-    wbot.options = def_options
-    wbot.browser = "EDGE"
+setup(
+    name="TexneoUtils",
+    version=VERSION,
+    author="Texneo",
+    author_email="github@texneo.com",
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/plain",
+    packages=find_packages(),
+    install_requires=[
+        'botcity-framework-web>=0.9.0,<1.0',
+        'sqlalchemy',
+        'pandas',
+        'webdriver-manager>=4.0.2',
+        'numpy<2',
+        'undetected-chromedriver==2.1.1'
+    ],
+    keywords=['python', 'automação', 'texneo', 'botcity'],
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Operating System :: Microsoft :: Windows",
+        "License :: OSI Approved :: MIT License"
+    ],
+    python_requires='>=3.7',
+    cmdclass={
+        'install': PostInstallCommand
+    }
+)
