@@ -56,6 +56,7 @@ setup(
     long_description_content_type="text/plain",
     packages=find_packages(),
     install_requires=[
+        'selenium<4.10',
         'botcity-framework-web>=0.9.0,<1.0',
         'sqlalchemy',
         'pandas',
