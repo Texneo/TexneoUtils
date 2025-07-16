@@ -1,5 +1,5 @@
 from botcity.web.browsers.edge import default_options
-from botcity.web import Browser
+from botcity.web import Browser, WebBot
 from time import sleep
 import os, time, traceback
 
@@ -18,7 +18,7 @@ def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, esp
     """
     Inicializa o Edge em modo privado usando apenas capabilities,
     e já navega para a URL especificada.
-    """
+    
 
     diretorio_temp = os.path.join(os.getcwd(), "temp")
     os.makedirs(diretorio_temp, exist_ok=True)
@@ -68,4 +68,15 @@ def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, esp
                 pass
             time.sleep(espera)
 
-    raise RuntimeError(f"⚠Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
+    raise RuntimeError(f"⚠Não foi possível iniciar o navegador após {max_tentativas} tentativas.") """
+
+    # Instantiate the WebBot
+    bot = WebBot()
+
+    # Configure whether or not to run on headless mode
+    bot.headless = False
+
+    # Set the WebDriver path
+    bot.driver_path = "C:\Program Files (x86)\Microsoft\Edge\Application\"
+
+    wbot = bot
