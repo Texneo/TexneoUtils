@@ -3,30 +3,9 @@ from botcity.web import Browser
 from time import sleep
 import os, time
 
-from webdriver_manager.core.driver import Driver
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.edge.options import Options as EdgeOptions
-
-# 🔧 Subclasse do Driver para forçar URL nova
-class CustomEdgeDriver(Driver):
-    def __init__(self, name, version, os_type):
-        super().__init__(name, version, os_type)
-    
-    def get_latest_release_url(self):
-        # Força o novo domínio
-        return f"https://msedgedriver.microsoft.com/LATEST_RELEASE"
-
-    def get_driver_url(self, version):
-        # Força o novo domínio
-        base_url = "https://msedgedriver.microsoft.com"
-        platform = "WIN64" if "64" in self.os_type else "WIN32"
-        return f"{base_url}/edgedriver/{version}/edgedriver_{platform}.zip"
-
-# Subclasse do Manager que usa o CustomEdgeDriver
-class CustomEdgeDriverManager(EdgeChromiumDriverManager):
-    def get_driver(self):
-        return CustomEdgeDriver(name="edgedriver", version=self.driver_version, os_type=self.os_type)
-
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium import webdriver
 
 def colocar_em_primeiro_plano(dbot):
     """
@@ -38,26 +17,28 @@ def colocar_em_primeiro_plano(dbot):
     janela_edge = dbot.app.top_window()
     janela_edge.set_focus()
 
-
 def configurar(wbot):
     """
-    Prepara EDGE para a execução padrão.
-
+    Prepara EDGE para a execução padrão usando driver fixo.
+    
     -> wbot: Instância do web bot ativa.
     """
+
     diretorio_temp = os.path.join(os.getcwd(), "temp")
 
     while True:
         try:
             if not os.path.exists(diretorio_temp):
                 os.makedirs(diretorio_temp)
+
             while not os.path.exists(diretorio_temp):
                 time.sleep(0.5)
             break
         except:
             pass
 
-    def_options = default_options()
+    # Configura opções do Edge
+    def_options = EdgeOptions()
     def_options.add_argument("--start-maximized")
     def_options.add_argument("--remote-debugging-port=9222")
     def_options.add_argument("--inprivate")
@@ -69,10 +50,12 @@ def configurar(wbot):
         }
     })
 
+    # Caminho fixo para o EdgeDriver
+    driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
+    wbot.driver_path = driver_path
+
+    # Se estiver instanciando o webdriver aqui diretamente:
+    # wbot.driver = webdriver.Edge(service=EdgeService(driver_path), options=def_options)
+
     wbot.options = def_options
-
-    # Usa o CustomEdgeDriverManager com URL corrigida
-    wbot.driver_path = CustomEdgeDriverManager().install()
-
-    sleep(5)
-    wbot.browser = Browser.EDGE
+    wbot.browser = "EDGE"
