@@ -17,7 +17,7 @@ setup(
         'botcity-framework-web>=0.9.0,<1.0',
         'sqlalchemy',
         'pandas',
-        'webdriver-manager>=4.0.2',  # ✅ versão corrigida
+        'webdriver-manager-mirrored>=4.0.2.dev0',  # ✅ versão corrigida
         'numpy<2',
         'undetected-chromedriver==2.1.1'
     ],
