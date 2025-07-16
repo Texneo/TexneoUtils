@@ -14,7 +14,7 @@ def colocar_em_primeiro_plano(dbot):
     janela_edge = dbot.app.top_window()
     janela_edge.set_focus()
 
-def configurar(wbot, url_inicial="www.google.com", max_tentativas=3, espera=5):
+def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, espera=5):
     """
     Inicializa o Edge em modo privado usando apenas capabilities,
     e já navega para a URL especificada.
