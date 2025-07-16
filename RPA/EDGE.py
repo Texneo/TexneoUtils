@@ -27,17 +27,17 @@ def configurar(wbot, max_tentativas=3, espera=5):
 
     # Como não há .add_argument(), usamos desired_capabilities
     # Criação dos capabilities de forma direta
-    capabilities = options.to_capabilities()
-    capabilities["ms:edgeOptions"] = {
-        "args": [f"--user-data-dir={diretorio_temp}"]
-    }
+    #capabilities = options.to_capabilities()
+    #capabilities["ms:edgeOptions"] = {
+    #    "args": [f"--user-data-dir={diretorio_temp}"]
+    #}
 
     for tentativa in range(1, max_tentativas + 1):
         try:
             print(f"Tentativa {tentativa}/{max_tentativas} de iniciar EdgeDriver...")
 
             # Sem options, usamos apenas capabilities
-            driver = webdriver.Edge(executable_path=driver_path, capabilities=capabilities)
+            driver = webdriver.Edge(executable_path=driver_path)
 
             wbot.driver_path = driver_path
             wbot.browser = "EDGE"
