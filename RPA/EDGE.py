@@ -2,7 +2,7 @@ from botcity.web.browsers.edge import default_options
 from botcity.web import Browser
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from time import sleep
-import os, shutil, time
+import os, shutil, time, zipfile, requests
 
 def colocar_em_primeiro_plano(dbot):
     """
