@@ -64,10 +64,10 @@ def configurar(wbot, max_tentativas=3, espera=5):
         except Exception:
             print(f"Erro ao iniciar o EdgeDriver na tentativa {tentativa}:")
             traceback.print_exc()
-            try:
-                driver.quit()
-            except:
-                pass
+            #try:
+            #   driver.quit()
+            #except:
+            #    pass
             time.sleep(espera)
 
     raise RuntimeError(f"Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
