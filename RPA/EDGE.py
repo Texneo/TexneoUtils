@@ -23,18 +23,21 @@ def configurar(wbot, max_tentativas=3, espera=5):
     driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
 
     options = EdgeOptions()
-    options.use_chromium = True
-    options.add_argument("--start-maximized")
-    options.add_argument("--remote-debugging-port=9222")
-    options.add_argument("--inprivate")
-    options.add_argument(f"user-data-dir={diretorio_temp}")
+    options.use_chromium = True  # Apenas se for Chromium-based Edge
+
+    # Como não há .add_argument(), usamos desired_capabilities
+    # Criação dos capabilities de forma direta
+    capabilities = options.to_capabilities()
+    capabilities["ms:edgeOptions"] = {
+        "args": [f"--user-data-dir={diretorio_temp}"]
+    }
 
     for tentativa in range(1, max_tentativas + 1):
         try:
             print(f"Tentativa {tentativa}/{max_tentativas} de iniciar EdgeDriver...")
-            
-            # Aqui está o ponto chave para Selenium antigo:
-            driver = webdriver.Edge(executable_path=driver_path, capabilities=options.to_capabilities())
+
+            # Sem options, usamos apenas capabilities
+            driver = webdriver.Edge(executable_path=driver_path, capabilities=capabilities)
 
             wbot.driver_path = driver_path
             wbot.browser = "EDGE"
@@ -44,7 +47,7 @@ def configurar(wbot, max_tentativas=3, espera=5):
             return
 
         except Exception:
-            print(f"❌ Erro ao iniciar o EdgeDriver na tentativa {tentativa}:")
+            print(f"Erro ao iniciar o EdgeDriver na tentativa {tentativa}:")
             traceback.print_exc()
             try:
                 driver.quit()
@@ -52,4 +55,4 @@ def configurar(wbot, max_tentativas=3, espera=5):
                 pass
             time.sleep(espera)
 
-    raise RuntimeError(f"❌ Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
+    raise RuntimeError(f"Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
