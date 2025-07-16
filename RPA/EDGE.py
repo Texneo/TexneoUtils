@@ -34,8 +34,13 @@ def configurar(wbot, max_tentativas=3, espera=5):
         "ms:edgeOptions": {
             "args": [
                 "--inprivate",  # Habilita o modo anônimo
-                "--disable-features=Identity",  # Desabilita integração com conta Microsoft
+                "--disable-features=Identity",  # Desabilita a autenticação implícita
                 "--disable-identity-provider",  # Desabilita provedor de identidade
+                "--disable-sync",  # Desabilita a sincronização do navegador
+                "--disable-extensions",  # Desabilita extensões do navegador
+                "--disable-logging",  # Desabilita logs internos do navegador
+                "--no-first-run",  # Impede execução de inicialização do primeiro uso
+                "--no-default-browser-check",  # Impede checagem de navegador padrão
                 f"--user-data-dir={diretorio_temp}",  # Usar o diretório temporário
                 "--remote-debugging-port=9222"  # Ativa a porta de depuração
             ]
