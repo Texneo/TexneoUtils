@@ -1,5 +1,6 @@
 from botcity.web.browsers.edge import default_options
 from botcity.web import Browser
+from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from time import sleep
 import os, shutil, time
@@ -47,11 +48,23 @@ def configurar(wbot):
     def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
     wbot.options = def_options
 
+
+
+        # Defina o caminho manual para o driver baixado
+    driver_path = "C:\\Users\\bot-python-01\\Desktop\\edgedriver_win64\\msedgedriver.exe"  # Altere para o caminho correto
+    
+    # Definindo o serviço do EdgeDriver
+    service = Service(driver_path)
+    
+    # Criação do driver com o caminho manual
+    wbot.driver = webdriver.Edge(service=service)
+    
+
     # Definindo caminho do Driver
     #manager = EdgeChromiumDriverManager()
-    manager = EdgeChromiumDriverManager(url="https://msedgedriver.microsoft.com/LATEST_RELEASE_138_WINDOWS")
-    print(f"Baixando o driver da URL: {manager.driver.get_driver_download_url('win')}")
-    wbot.driver_path = manager.install()
+    #manager = EdgeChromiumDriverManager(url="https://msedgedriver.microsoft.com/LATEST_RELEASE_138_WINDOWS")
+    #print(f"Baixando o driver da URL: {manager.driver.get_driver_download_url('win')}")
+    #wbot.driver_path = manager.install()
     #wbot.driver_path = EdgeChromiumDriverManager(version="138.0.3351.95").install()
 
     sleep(5)
