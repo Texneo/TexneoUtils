@@ -76,7 +76,19 @@ def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, esp
     # Configure whether or not to run on headless mode
     bot.headless = False
 
+    profile_path = "C:\\Users\\bot-python-01\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\"
+
+    # Fetch the default options for my preferred browser
+    # Pass in the headless, download_folder_path and user_data_dir
+    # to be used when building the default_options
+    def_options = default_options(
+        headless=bot.headless,
+        user_data_dir=profile_path  # Inform the profile path that wants to start the browser
+    ) 
+
+    # Update the options to use the customized Options.
+    bot.options = def_options
     # Set the WebDriver path
-    bot.driver_path = "C:\Program Files (x86)\Microsoft\Edge\Application\"
+    bot.driver_path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\"
 
     wbot = bot
