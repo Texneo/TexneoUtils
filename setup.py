@@ -60,7 +60,7 @@ setup(
         'botcity-framework-web>=0.9.0,<1.0',
         'sqlalchemy',
         'pandas',
-        'webdriver-manager>=4.0.2',
+        'webdriver-manager=3.8.6',
         'numpy<2',
         'undetected-chromedriver==2.1.1'
     ],
