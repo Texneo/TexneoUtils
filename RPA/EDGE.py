@@ -18,11 +18,12 @@ def colocar_em_primeiro_plano(dbot):
 def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
     driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
 
-    #options = Options()
-    #options.use_chromium = True
-    #options.add_argument("--start-maximized")
-    #options.add_argument("--remote-debugging-port=9222")
-    #options.add_argument("--inprivate")
+    options = Options()
+    options.use_chromium = True
+    options.add_argument("--start-maximized")
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--inprivate")
+    options.add_argument(f"user-data-dir={diretorio_temp}")
 
     tentativa = 0
 
