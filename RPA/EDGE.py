@@ -50,7 +50,7 @@ def configurar(wbot):
     # Definindo caminho do Driver
     #manager = EdgeChromiumDriverManager()
     manager = EdgeChromiumDriverManager(url="https://msedgedriver.microsoft.com/LATEST_RELEASE_138_WINDOWS")
-    print(f"Baixando o driver da URL: {manager.driver.get_driver_download_url()}")
+    print(f"Baixando o driver da URL: {manager.driver.get_driver_download_url('win')}")
     wbot.driver_path = manager.install()
     #wbot.driver_path = EdgeChromiumDriverManager(version="138.0.3351.95").install()
 
