@@ -4,7 +4,7 @@ from time import sleep
 import os, time
 
 from selenium.webdriver import EdgeOptions
-from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium import webdriver
 
 def colocar_em_primeiro_plano(dbot):
