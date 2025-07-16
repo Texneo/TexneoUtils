@@ -31,7 +31,7 @@ def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
         try:
             print(f"Tentando iniciar o EdgeDriver (tentativa {tentativa+1}/{max_tentativas})...")
 
-            driver = webdriver.Edge(executable_path=driver_path)
+            driver = webdriver.Edge(executable_path=driver_path, options=options)
 
             # Configura o wbot
             wbot.driver_path = driver_path
