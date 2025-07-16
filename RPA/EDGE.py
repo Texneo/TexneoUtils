@@ -3,7 +3,7 @@ from botcity.web import Browser
 from time import sleep
 import os, time
 
-from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service as EdgeService
 from selenium import webdriver
 
@@ -32,24 +32,20 @@ def configurar(wbot):
         except:
             pass
 
-    # ✅ Configura opções do Edge (compatível com Selenium antigo)
-    def_options = EdgeOptions()
-    def_options.add_argument("--start-maximized")
-    def_options.add_argument("--remote-debugging-port=9222")
-    def_options.add_argument("--inprivate")
-    def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
-    def_options.add_experimental_option('useAutomationExtension', False)
-    def_options.add_experimental_option('prefs', {
-        'browser': {
-            'show_hub_popup_on_download_start': False
-        }
-    })
+
+    
+
+    options = Options()
+    options.binary_location = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
+    options.add_argument("--start-maximized")
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--inprivate")
+    
+    driver = webdriver.Edge(options = options)
 
     # Caminho fixo para o EdgeDriver
     driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
     wbot.driver_path = driver_path
-    wbot.options = def_options
+    wbot.options = options
     wbot.browser = "EDGE"
-
-    # (Opcional) Se quiser instanciar direto:
-    # wbot.driver = webdriver.Edge(service=EdgeService(driver_path), options=def_options)
+    wbot.driver = webdriver.Edge(options = options)
