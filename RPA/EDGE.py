@@ -35,9 +35,9 @@ def configurar(wbot):
 
     # Configura opções do Edge (API ANTIGA com add_argument)
     def_options = EdgeOptions()
-    def_options.add_argument("--start-maximized")
-    def_options.add_argument("--remote-debugging-port=9222")
-    def_options.add_argument("--inprivate")
+    def_options.arguments.append("--start-maximized")
+    def_options.arguments.append("--remote-debugging-port=9222")
+    def_options.arguments.append("--inprivate")
     def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
     def_options.add_experimental_option('useAutomationExtension', False)
     def_options.add_experimental_option('prefs', {
