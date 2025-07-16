@@ -33,14 +33,14 @@ def configurar(wbot, max_tentativas=3, espera=5):
         try:
             print(f"Tentativa {tentativa}/{max_tentativas} de iniciar EdgeDriver...")
             
-            # 🚨 Aqui está o ponto chave para Selenium antigo:
+            # Aqui está o ponto chave para Selenium antigo:
             driver = webdriver.Edge(executable_path=driver_path, capabilities=options.to_capabilities())
 
             wbot.driver_path = driver_path
             wbot.browser = "EDGE"
             wbot.driver = driver
 
-            print("✅ Navegador iniciado com sucesso!")
+            print("Navegador iniciado com sucesso!")
             return
 
         except Exception:
