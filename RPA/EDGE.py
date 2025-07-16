@@ -17,6 +17,17 @@ def colocar_em_primeiro_plano(dbot):
 def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
     driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
 
+    diretorio_temp = os.path.join(os.getcwd(), f"temp_{int(time.time())}")
+
+    if os.path.exists(diretorio_temp):
+        shutil.rmtree(diretorio_temp)
+        os.makedirs(diretorio_temp)
+    else:
+        os.makedirs(diretorio_temp)
+
+    while not os.path.exists(diretorio_temp):
+        time.sleep(0.5)
+
     options = EdgeOptions()
     options.args = [
         "--start-maximized",
