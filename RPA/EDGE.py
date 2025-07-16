@@ -35,6 +35,6 @@ def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, esp
     # Update the options to use the customized Options.
     bot.options = def_options
     # Set the WebDriver path
-    bot.driver_path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\"
+    bot.driver_path = "C:\Users\\bot-python-01\\Desktop\\edgedriver_win64\\msedgedriver.exe"
 
     wbot = bot
