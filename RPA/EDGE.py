@@ -14,44 +14,59 @@ def colocar_em_primeiro_plano(dbot):
     janela_edge = dbot.app.top_window()
     janela_edge.set_focus()
 
-def configurar(wbot, max_tentativas=3, espera=5):
+def configurar(wbot, url_inicial="www.google.com", max_tentativas=3, espera=5):
+    """
+    Inicializa o Edge em modo privado usando apenas capabilities,
+    e já navega para a URL especificada.
+    """
+
     diretorio_temp = os.path.join(os.getcwd(), "temp")
     os.makedirs(diretorio_temp, exist_ok=True)
 
     driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
 
-    # Criando o dicionário de capabilities diretamente
     capabilities = {
         "browserName": "MicrosoftEdge",
         "platform": "WINDOWS",
         "ms:edgeOptions": {
             "args": [
-                "--inprivate",  # Habilita o modo anônimo
-                "--disable-features=Identity",  # Desabilita a autenticação implícita
-                "--disable-identity-provider",  # Desabilita provedor de identidade
-                "--disable-sync",  # Desabilita a sincronização do navegador
-                "--disable-extensions",  # Desabilita extensões do navegador
-                "--disable-logging",  # Desabilita logs internos do navegador
-                "--no-first-run",  # Impede execução de inicialização do primeiro uso
-                "--no-default-browser-check",  # Impede checagem de navegador padrão
-                f"--user-data-dir={diretorio_temp}",  # Usar o diretório temporário
-                "--remote-debugging-port=9222"  # Ativa a porta de depuração
+                "--inprivate",
+                "--disable-features=Identity,Sync,Extensions",
+                "--disable-identity-provider",
+                "--no-first-run",
+                "--no-default-browser-check",
+                f"--user-data-dir={diretorio_temp}",
+                "--remote-debugging-port=9222"
             ]
         }
     }
 
-    # Tentativa de inicializar o navegador
-    try:
-        driver = webdriver.Edge(executable_path=driver_path, capabilities=capabilities)
+    for i in range(1, max_tentativas+1):
+        try:
+            print(f"[{i}/{max_tentativas}] Iniciando EdgeDriver...")
+            driver = webdriver.Edge(executable_path=driver_path, capabilities=capabilities)
 
-        # Configura o objeto wbot
-        wbot.driver_path = driver_path
-        wbot.browser = "EDGE"
-        wbot.driver = driver
+            # Navega imediatamente para a URL desejada
+            print("Navegando para:", url_inicial)
+            driver.get(url_inicial)
 
-        print("Navegador iniciado com sucesso!")
-        return driver
+            # Aguarda um pouco para verificar se carrega
+            time.sleep(5)
 
-    except Exception as e:
-        print(f"Erro ao iniciar o navegador: {e}")
-        raise Exception("Falha ao iniciar o navegador com as configurações especificadas")
+            wbot.driver_path = driver_path
+            wbot.browser = "EDGE"
+            wbot.driver = driver
+
+            print("Navegador iniciado e conectado com sucesso!")
+            return
+
+        except Exception:
+            print(f"Falhou na tentativa {i}:")
+            traceback.print_exc()
+            try:
+                driver.quit()
+            except:
+                pass
+            time.sleep(espera)
+
+    raise RuntimeError(f"⚠Não foi possível iniciar o navegador após {max_tentativas} tentativas.")
