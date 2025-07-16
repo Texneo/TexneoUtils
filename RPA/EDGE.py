@@ -3,6 +3,7 @@ from botcity.web import Browser
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from time import sleep
+from selenium import webdriver
 import os, shutil, time
 
 def colocar_em_primeiro_plano(dbot):
