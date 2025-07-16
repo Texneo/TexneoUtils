@@ -37,11 +37,12 @@ def configurar(wbot):
     #options.add_argument("--start-maximized")
     #options.add_argument("--remote-debugging-port=9222")
     #options.add_argument("--inprivate")
+
+    driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
     
-    driver = webdriver.Edge(service=service, options=options)
+    driver = webdriver.Edge(executable_path=driver_path, options=options)
 
     # Caminho fixo para o EdgeDriver
-    driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
     wbot.driver_path = driver_path
     wbot.options = options
     wbot.browser = "EDGE"
