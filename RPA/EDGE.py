@@ -19,24 +19,22 @@ def configurar(wbot):
     """
     Prepara EDGE para a execução padrão usando driver fixo.
     """
-    diretorio_temp = os.path.join(os.getcwd(), "temp")
+    
+    driver_path = r"C:\Users\bot-python-01\Desktop\edgedriver_win64\msedgedriver.exe"
 
-    while True:
-        try:
-            if not os.path.exists(diretorio_temp):
-                os.makedirs(diretorio_temp)
+    #options = Options()
+    #options.use_chromium = True  # necessário para Edge moderno
 
-            while not os.path.exists(diretorio_temp):
-                time.sleep(0.5)
-            break
-        except:
-            pass
+    # Esses atributos podem não funcionar em versões muito antigas
+    #options.add_argument("--start-maximized")
+    #options.add_argument("--remote-debugging-port=9222")
+    #options.add_argument("--inprivate")
 
-    options = Options()
-    options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    # No Selenium muito antigo (pré-3.8), apenas isso funciona:
+    driver = webdriver.Edge(executable_path=driver_path)
 
-    # Caminho fixo para o EdgeDriver
-    #wbot.driver_path = driver_path
+    # Configuração para o wbot
+    wbot.driver_path = driver_path
     #wbot.options = options
     wbot.browser = "EDGE"
-    wbot.driver = webdriver.Edge(options = options)
+    wbot.driver = driver
