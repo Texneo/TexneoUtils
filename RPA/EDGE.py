@@ -1,7 +1,7 @@
 from botcity.web.browsers.edge import default_options
 from botcity.web import Browser
 from time import sleep
-import os, time
+import os, time, traceback
 
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium import webdriver
@@ -55,6 +55,7 @@ def configurar(wbot, max_tentativas=3, espera_entre_tentativas=5):
 
         except Exception as e:
             print(f"Erro ao iniciar o EdgeDriver: {e}")
+            traceback.print_exc()
             tentativa += 1
 
             # Tenta encerrar qualquer driver pendente
