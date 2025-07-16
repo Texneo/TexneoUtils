@@ -3,7 +3,7 @@ from botcity.web import Browser
 from time import sleep
 import os, time
 
-from selenium.webdriver import EdgeOptions  # ✅ VERSÃO ANTIGA!
+from selenium.webdriver.edge.options import Options as EdgeOptions  # ✅ CORRETO
 from selenium.webdriver.edge.service import Service as EdgeService
 from selenium import webdriver
 
