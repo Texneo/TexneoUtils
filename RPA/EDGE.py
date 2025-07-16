@@ -48,10 +48,27 @@ def configurar(wbot):
     wbot.options = def_options
 
     # Definindo caminho do Driver
-    manager = EdgeChromiumDriverManager()
-    wbot.driver_path = manager.install()
+    #manager = EdgeChromiumDriverManager()
+    wbot.driver_path = baixar_edgedriver("138")
 
     sleep(5)
 
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
+
+def baixar_edgedriver(versao="138"):
+    url_versao = f"https://msedgedriver.microsoft.com/LATEST_RELEASE_{versao}_WINDOWS"
+    versao_driver = requests.get(url_versao).text.strip()
+
+    url_driver = f"https://msedgedriver.azureedge.net/{versao_driver}/edgedriver_win64.zip"
+    caminho_zip = os.path.join("temp", "edgedriver.zip")
+
+    os.makedirs("temp", exist_ok=True)
+
+    with open(caminho_zip, "wb") as f:
+        f.write(requests.get(url_driver).content)
+
+    with zipfile.ZipFile(caminho_zip, 'r') as zip_ref:
+        zip_ref.extractall("temp")
+
+    return os.path.abspath(os.path.join("temp", "msedgedriver.exe"))
