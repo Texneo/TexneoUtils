@@ -27,16 +27,15 @@ def configurar(wbot, url_inicial="www.google.com", max_tentativas=3, espera=5):
 
     capabilities = {
         "browserName": "MicrosoftEdge",
-        "platform": "WINDOWS",
         "ms:edgeOptions": {
             "args": [
                 "--inprivate",
-                "--disable-features=Identity,Sync,Extensions",
-                "--disable-identity-provider",
-                "--no-first-run",
-                "--no-default-browser-check",
                 f"--user-data-dir={diretorio_temp}",
-                "--remote-debugging-port=9222"
+                "--disable-extensions",
+                "--disable-sync",
+                "--disable-features=msControlled,TranslateUI",
+                "--remote-debugging-port=9222",
+                "--start-maximized"
             ]
         }
     }
