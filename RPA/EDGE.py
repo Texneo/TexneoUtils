@@ -3,9 +3,6 @@ from botcity.web import Browser, WebBot
 from time import sleep
 import os, time, traceback
 
-from selenium.webdriver.edge.options import Options as EdgeOptions
-from selenium import webdriver
-
 def colocar_em_primeiro_plano(dbot):
     """
     Coloca aplicação do Edge em primeiro plano.
@@ -14,27 +11,46 @@ def colocar_em_primeiro_plano(dbot):
     janela_edge = dbot.app.top_window()
     janela_edge.set_focus()
 
-def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, espera=5):
+def configurar(wbot):
 
-    # Instantiate the WebBot
-    bot = WebBot()
+    """
+    
+    Prepara EDGE para a execução padrão.
 
-    # Configure whether or not to run on headless mode
-    bot.headless = False
+    ->
+    wbot: Instância do web bot ativa.
+    
+    """
 
-    profile_path = "C:\\Users\\bot-python-01\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Profile 1\\"
+    diretorio_temp = os.path.join(os.getcwd(), f"temp")
 
-    # Fetch the default options for my preferred browser
-    # Pass in the headless, download_folder_path and user_data_dir
-    # to be used when building the default_options
-    def_options = default_options(
-        headless=bot.headless,
-        user_data_dir=profile_path  # Inform the profile path that wants to start the browser
-    ) 
+    while True:
+        try:
+            if os.path.exists(diretorio_temp):
+                pass
+            else:
+                os.makedirs(diretorio_temp)
+        
+            while not os.path.exists(diretorio_temp):
+                time.sleep(0.5)
+            break
+        except:
+            pass
 
-    # Update the options to use the customized Options.
-    bot.options = def_options
-    # Set the WebDriver path
-    bot.driver_path = "C:\\Users\\bot-python-01\\Desktop\\edgedriver_win64\\msedgedriver.exe"
+    def_options = default_options()
+    def_options.add_argument("--start-maximized")
+    def_options.add_argument("--remote-debugging-port=9222")
+    def_options.add_argument("--inprivate")
+    def_options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
+    def_options.add_experimental_option('useAutomationExtension', False)
+    def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
+    wbot.options = def_options
 
-    wbot = bot
+    # Definindo caminho do Driver
+    manager = EdgeChromiumDriverManager()
+    wbot.driver_path = manager.install()
+
+    sleep(5)
+
+    # Definindo navegador como EDGE
+    wbot.browser = Browser.EDGE
