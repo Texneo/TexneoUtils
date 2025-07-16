@@ -28,11 +28,18 @@ def configurar(wbot, max_tentativas=3, espera=5):
     # Como não há .add_argument(), usamos desired_capabilities
     # Criação dos capabilities de forma direta
     capabilities = options.to_capabilities()
-    capabilities["ms:edgeOptions"] = {
-        "args": [
-            "--inprivate",  # Navegação privada
-            f"--user-data-dir={diretorio_temp}",  # Diretório temporário
-        ]
+    capabilities = {
+        "browserName": "MicrosoftEdge",
+        "platform": "WINDOWS",
+        "ms:edgeOptions": {
+            "args": [
+                "--inprivate",  # Habilita o modo anônimo
+                "--disable-features=Identity",  # Desabilita integração com conta Microsoft
+                "--disable-identity-provider",  # Desabilita provedor de identidade
+                f"--user-data-dir={diretorio_temp}",  # Usar o diretório temporário
+                "--remote-debugging-port=9222"  # Ativa a porta de depuração
+            ]
+        }
     }
 
     for tentativa in range(1, max_tentativas + 1):
