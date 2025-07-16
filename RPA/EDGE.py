@@ -22,7 +22,7 @@ def configurar(wbot, url_inicial="https://www.google.com", max_tentativas=3, esp
     # Configure whether or not to run on headless mode
     bot.headless = False
 
-    profile_path = "C:\\Users\\bot-python-01\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\"
+    profile_path = "C:\\Users\\bot-python-01\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Profile 1\\"
 
     # Fetch the default options for my preferred browser
     # Pass in the headless, download_folder_path and user_data_dir
