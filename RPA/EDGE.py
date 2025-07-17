@@ -25,6 +25,6 @@ def configurar(wbot):
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
 
-    wbot.driver_path = "C:\\Users\\bot-python-01\\Documents\\edgedriver_win64\\msedgedriver.exe"
+    wbot.driver_path = "C:\\Driver Edge\\edgedriver_win64\\msedgedriver.exe"
 
     wbot.headless = False
