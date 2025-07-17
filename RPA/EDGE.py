@@ -27,7 +27,6 @@ def configurar(wbot):
         headless=wbot.headless,
         download_folder_path="C:\\Users\\bot-python-01\\Downloads",
         user_data_dir=None,  # Informing None here will generate a temporary directory
-        page_load_strategy=PageLoadStrategy.NORMAL
     )
 
     wbot.options = def_options
