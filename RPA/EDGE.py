@@ -1,5 +1,6 @@
 from botcity.web import Browser, WebBot
 from time import sleep
+from botcity.web.browsers.edge import default_options
 
 import os, shutil, time
 
@@ -21,6 +22,15 @@ def configurar(wbot):
     wbot: Instância do web bot ativa.
     
     """
+
+    def_options = default_options(
+        headless=bot.headless,
+        download_folder_path="C:\\Users\\bot-python-01\\Downloads",
+        user_data_dir=None,  # Informing None here will generate a temporary directory
+        page_load_strategy=PageLoadStrategy.NORMAL
+    )
+
+    wbot.options = def_options
 
     # Definindo navegador como EDGE
     wbot.browser = Browser.EDGE
