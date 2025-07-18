@@ -31,12 +31,7 @@ def configurar(wbot):
     def_options.add_argument("--inprivate")
 
     # Evita popups e prompts de download
-    prefs = {
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-        "safebrowsing.enabled": True
-    }
-    def_options.add_experimental_option("prefs", prefs)
+    def_options.add_experimental_option('prefs', {'browser':{'show_hub_popup_on_download_start': False}})
 
     wbot.options = def_options
 
