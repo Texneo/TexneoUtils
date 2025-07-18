@@ -28,6 +28,7 @@ def configurar(wbot):
         download_folder_path="C:\\Users\\bot-python-01\\Downloads",
         user_data_dir=None,  # Informing None here will generate a temporary directory
     )
+    def_options.add_argument("--inprivate")
 
     wbot.options = def_options
 
