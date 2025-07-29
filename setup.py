@@ -17,6 +17,7 @@ setup(
         'selenium',
         'botcity-framework-web>=0.9.0,<1.0',
         'sqlalchemy',
+        'tqdm',
         'pandas',
         'webdriver-manager==4.0.2',
         'numpy<2',
