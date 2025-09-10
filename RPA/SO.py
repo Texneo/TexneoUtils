@@ -33,7 +33,11 @@ def mover_arquivo(origem, destino, nome_origem, nome_destino):
 
     """
 
-    os.rename(f"{origem}\{nome_origem}", f"{destino}\{nome_destino}")
+    try:
+        os.remove(f"{destino}\{nome_destino}")
+        os.rename(f"{origem}\{nome_origem}", f"{destino}\{nome_destino}")
+    except:
+        os.rename(f"{origem}\{nome_origem}", f"{destino}\{nome_destino}")
 
 def preparar_execucao():
 
@@ -67,5 +71,6 @@ def valida_diretorios(lista_diretorios):
     """
 
     for diretorio in lista_diretorios:
+
 
         os.listdir(diretorio)
