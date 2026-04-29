@@ -42,7 +42,7 @@ def exportar_SQL_para_TXT(caminho_arquivo, db_server, db_database, db_username, 
 
     # Lendo os dados em chunks e escrevendo no arquivo CSV
     for chunk in pandas.read_sql_query(query, engine, chunksize=chunk_size):
-        chunk.to_csv(caminho_arquivo, mode='a', index=False, header=not header_written, sep=delimitador, encoding=encoding)
+        chunk.to_csv(caminho_arquivo, mode='a', index=False, header=not header_written, sep=delimitador, encoding=encoding, decimal=',')
 
         header_written = True
 
