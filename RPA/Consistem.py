@@ -16,7 +16,7 @@ def acessar_tela(wbot, tela):
     try:
 
         wbot.wait(1000)
-        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']", by=By.XPATH)
+        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input bordered bordered_input']/input", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=2000)
         busca.clear()
         busca.send_keys(tela)
@@ -29,7 +29,7 @@ def acessar_tela(wbot, tela):
 
         wbot.wait(2000)
         
-        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input']/input", by=By.XPATH)
+        busca = wbot.find_element(selector="//div[@class='ui mini fluid action left icon input csw_sidebar_input bordered bordered_input']/input", by=By.XPATH)
         wbot.wait_for_element_visibility(element=busca, visible=True, waiting_time=10000)
         busca.clear()
         busca.send_keys(tela)
