@@ -21,8 +21,8 @@ setup(
         'pandas',
         'webdriver-manager==4.0.2',
         'numpy<2',
-        'undetected-chromedriver>=3.5.5',
-        'setuptools'
+        'undetected-chromedriver==2.1.1',
+        'setuptools',
     ],
     keywords=['python', 'automação', 'texneo', 'botcity'],
     classifiers=[
